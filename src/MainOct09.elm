@@ -339,7 +339,7 @@ coinsView model =
 
 pointsView: Player -> Html Msg
 pointsView player =
-    div [style "font-size" "100px"
+    div [style "font-size" "40px"
         ]
         [text <| 
              List.foldl (\n coinstr -> coinstr++"🪙") ""(List.range 1 player.points)
@@ -359,15 +359,24 @@ view model =
                              ,style "top" "0"
                              ,style "left" "100px"
                              ,style "background" "#fdd"
+                             ,Html.Attributes.id "player2"
                              ]
-                             [case (List.head model.players) of
-                                  Nothing -> text ""
-                                  Just player -> text player.name
-                             ,case (List.head model.players) of
-                                  Nothing -> text ""
-                                  Just player ->
-                                      pointsView player
-                             ]
+                             (
+                             (case (List.head model.players) of
+                                  Nothing -> []
+                                  Just player -> [text player.name]
+                                                  ++[ pointsView player]
+                             )-- ++[div [style "width" "100px"
+                              --        ,style "height" "100px"
+                              --        ,style "position" "absolute"
+                              --        ,style "top" "0px"
+                              --        ,style "left" "700px"
+                              --        ,style "background" "#fff"
+                              --        ,Html.Attributes.id "playervideo2"
+                              --        ]
+                              --        []
+                              --   ]
+                             )
                         ,div [style "width" "800px"
                              ,style "height" "100px"
                              ,style "position" "absolute"
@@ -376,14 +385,12 @@ view model =
                              ,style "background" "#dfd"
                              ,style "transform" "rotate(90deg)"
                              ]
-                             [case (List.head <| List.drop 1 model.players) of
-                                  Nothing -> text ""
-                                  Just player -> text player.name
-                             ,case (List.head <| List.drop 1 model.players) of
-                                  Nothing -> text ""
-                                  Just player ->
-                                      pointsView player
-                             ]
+                             (case (List.head <| List.drop 1 model.players) of
+                                   Nothing -> []
+                                   Just player -> [text player.name
+                                                  ,pointsView player
+                                                  ]
+                              )
                         ,div [style "width" "800px"
                              ,style "height" "800px"
                              ,style "position" "absolute"
@@ -399,14 +406,12 @@ view model =
                              ,style "background" "#ddf"
                              ,style "transform" "rotate(-90deg)"
                              ]
-                             [case (List.head <| List.drop 2 model.players) of
-                                  Nothing -> text ""
-                                  Just player -> text player.name
-                             ,case (List.head <| List.drop 2 model.players) of
-                                  Nothing -> text ""
-                                  Just player ->
-                                      pointsView player
-                             ]
+                             (case (List.head <| List.drop 2 model.players) of
+                                  Nothing -> []
+                                  Just player -> [text player.name
+                                                 ,pointsView player
+                                                 ]
+                             )
                         ,div [style "width" "800px"
                              ,style "height" "100px"
                              ,style "position" "absolute"
@@ -415,6 +420,15 @@ view model =
                              ,style "background" "#ddd"
                              ]
                              [coinsView model]
+                        ,video[style "width" "100px"
+                            ,style "height" "100px"
+                            ,style "position" "absolute"
+                            ,style "top" "900px"
+                            ,style "left" "100px"
+                            ,style "background" "#fff"
+                            ,Html.Attributes.id "player1"
+                             ]
+                             [text "player1"]
                         ]
                     ]
     )

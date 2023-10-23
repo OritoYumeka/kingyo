@@ -6653,6 +6653,7 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$MainOct09$pointView = function (p) {
 	return A2(
@@ -6669,7 +6670,7 @@ var $author$project$MainOct09$pointsView = function (player) {
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'font-size', '100px')
+				A2($elm$html$Html$Attributes$style, 'font-size', '40px')
 			]),
 		_List_fromArray(
 			[
@@ -8252,6 +8253,7 @@ var $author$project$MainOct09$roomNameInputView = function (model) {
 				]))
 		]);
 };
+var $elm$html$Html$video = _VirtualDom_node('video');
 var $author$project$MainOct09$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -8288,29 +8290,26 @@ var $author$project$MainOct09$view = function (model) {
 										A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 										A2($elm$html$Html$Attributes$style, 'top', '0'),
 										A2($elm$html$Html$Attributes$style, 'left', '100px'),
-										A2($elm$html$Html$Attributes$style, 'background', '#fdd')
+										A2($elm$html$Html$Attributes$style, 'background', '#fdd'),
+										$elm$html$Html$Attributes$id('player2')
 									]),
-								_List_fromArray(
-									[
-										function () {
-										var _v1 = $elm$core$List$head(model.players);
-										if (_v1.$ === 'Nothing') {
-											return $elm$html$Html$text('');
-										} else {
-											var player = _v1.a;
-											return $elm$html$Html$text(player.name);
-										}
-									}(),
-										function () {
-										var _v2 = $elm$core$List$head(model.players);
-										if (_v2.$ === 'Nothing') {
-											return $elm$html$Html$text('');
-										} else {
-											var player = _v2.a;
-											return $author$project$MainOct09$pointsView(player);
-										}
-									}()
-									])),
+								function () {
+									var _v1 = $elm$core$List$head(model.players);
+									if (_v1.$ === 'Nothing') {
+										return _List_Nil;
+									} else {
+										var player = _v1.a;
+										return _Utils_ap(
+											_List_fromArray(
+												[
+													$elm$html$Html$text(player.name)
+												]),
+											_List_fromArray(
+												[
+													$author$project$MainOct09$pointsView(player)
+												]));
+									}
+								}()),
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
@@ -8323,29 +8322,20 @@ var $author$project$MainOct09$view = function (model) {
 										A2($elm$html$Html$Attributes$style, 'background', '#dfd'),
 										A2($elm$html$Html$Attributes$style, 'transform', 'rotate(90deg)')
 									]),
-								_List_fromArray(
-									[
-										function () {
-										var _v3 = $elm$core$List$head(
-											A2($elm$core$List$drop, 1, model.players));
-										if (_v3.$ === 'Nothing') {
-											return $elm$html$Html$text('');
-										} else {
-											var player = _v3.a;
-											return $elm$html$Html$text(player.name);
-										}
-									}(),
-										function () {
-										var _v4 = $elm$core$List$head(
-											A2($elm$core$List$drop, 1, model.players));
-										if (_v4.$ === 'Nothing') {
-											return $elm$html$Html$text('');
-										} else {
-											var player = _v4.a;
-											return $author$project$MainOct09$pointsView(player);
-										}
-									}()
-									])),
+								function () {
+									var _v2 = $elm$core$List$head(
+										A2($elm$core$List$drop, 1, model.players));
+									if (_v2.$ === 'Nothing') {
+										return _List_Nil;
+									} else {
+										var player = _v2.a;
+										return _List_fromArray(
+											[
+												$elm$html$Html$text(player.name),
+												$author$project$MainOct09$pointsView(player)
+											]);
+									}
+								}()),
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
@@ -8372,29 +8362,20 @@ var $author$project$MainOct09$view = function (model) {
 										A2($elm$html$Html$Attributes$style, 'background', '#ddf'),
 										A2($elm$html$Html$Attributes$style, 'transform', 'rotate(-90deg)')
 									]),
-								_List_fromArray(
-									[
-										function () {
-										var _v5 = $elm$core$List$head(
-											A2($elm$core$List$drop, 2, model.players));
-										if (_v5.$ === 'Nothing') {
-											return $elm$html$Html$text('');
-										} else {
-											var player = _v5.a;
-											return $elm$html$Html$text(player.name);
-										}
-									}(),
-										function () {
-										var _v6 = $elm$core$List$head(
-											A2($elm$core$List$drop, 2, model.players));
-										if (_v6.$ === 'Nothing') {
-											return $elm$html$Html$text('');
-										} else {
-											var player = _v6.a;
-											return $author$project$MainOct09$pointsView(player);
-										}
-									}()
-									])),
+								function () {
+									var _v3 = $elm$core$List$head(
+										A2($elm$core$List$drop, 2, model.players));
+									if (_v3.$ === 'Nothing') {
+										return _List_Nil;
+									} else {
+										var player = _v3.a;
+										return _List_fromArray(
+											[
+												$elm$html$Html$text(player.name),
+												$author$project$MainOct09$pointsView(player)
+											]);
+									}
+								}()),
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
@@ -8409,6 +8390,22 @@ var $author$project$MainOct09$view = function (model) {
 								_List_fromArray(
 									[
 										$author$project$MainOct09$coinsView(model)
+									])),
+								A2(
+								$elm$html$Html$video,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'width', '100px'),
+										A2($elm$html$Html$Attributes$style, 'height', '100px'),
+										A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+										A2($elm$html$Html$Attributes$style, 'top', '900px'),
+										A2($elm$html$Html$Attributes$style, 'left', '100px'),
+										A2($elm$html$Html$Attributes$style, 'background', '#fff'),
+										$elm$html$Html$Attributes$id('player1')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('player1')
 									]))
 							]))
 					]);
