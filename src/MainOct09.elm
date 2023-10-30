@@ -15,7 +15,7 @@ import Types exposing (..)
 import Simple.Animation as Animation exposing (Animation)
 import Simple.Animation.Animated as Animated
 import Simple.Animation.Property as P
-
+import Kingyo exposing (..)
 
 pondWidth = 800
 pondHeight = 800
@@ -215,8 +215,18 @@ update msg model =
 
 sukuu: (Float, Float) -> (List Kingyo) -> (List Kingyo)
 sukuu (x,y) kingyos =
+    let
+        radius kingyo = (case kingyo.level of
+                        1->60
+                        2->70
+                        3->80
+                        4->90
+                        5->60
+                        _->60
+                        )
+    in
     List.filter
-        (\k -> (sqrt (((toFloat k.pos.x)-x)^2+((toFloat k.pos.y)-y)^2)) > 60)
+        (\k -> (sqrt (((toFloat k.pos.x)-x)^2+((toFloat k.pos.y)-y)^2)) > (radius k))
             kingyos
                   
 relativePos : Pointer.Event -> ( Float, Float )
@@ -325,7 +335,7 @@ pondView model = Svg.svg [ Attr.width (String.fromInt (pondWidth))
                                    ,Attr.stroke "black"
                                    ][]
                          ]
-                      ++(List.map kingyoView model.kingyos)
+                      ++(List.map  fishView model.kingyos)
                       ++(List.indexedMap tsukamaetaKingyoView model.tsukamaeta)
                  )    
     
@@ -456,71 +466,6 @@ amiView p =
         ]
 
 
-kingyoView: Kingyo -> Svg Msg
-kingyoView kingyo =
-    let
-        vx = kingyo.v.x
-        vy = kingyo.v.y    
-        px = kingyo.pos.x
-        py = kingyo.pos.y
-        transtr = "(" ++ (String.fromInt kingyo.pos.x) ++ 
-                    "," ++ (String.fromInt kingyo.pos.y) ++ ")"
-        theta = String.fromFloat <| 
-                if kingyo.v.x > 0 then
-                    180/pi*(atan ((toFloat vy)/(toFloat vx)))
-                else
-                    180+180/pi*(atan ((toFloat vy)/(toFloat vx)))
-    in
-    Svg.g [Attr.transform (
-                "rotate(" ++ theta ++  
-                "," ++ (String.fromInt px) ++ 
-                "," ++ (String.fromInt py) ++
-                ")" ++
-                "translate" ++ transtr
-                )
-                ]
-        [Svg.path [Attr.d "m 0 20 l 30 -20 l -30 -20 l -60 26 l 0 -12 z"
-                , Attr.fill "red"
-                , Attr.stroke "red"
-              ]
-            []
-        ,Svg.circle [Attr.cx "15"
-                    ,Attr.cy "10"
-                    ,Attr.r "10"
-                    ,Attr.fill "white"
-                ][]
-        ,Svg.circle [Attr.cx "15"
-                    ,Attr.cy "10"
-                    ,Attr.r "8"
-                    ,Attr.fill "black"
-                    ][]
-        ,Svg.circle [Attr.cx "15"
-                    ,Attr.cy "-10"
-                    ,Attr.r "10"
-                    ,Attr.fill "white"
-                    ][]        
-        ,Svg.circle [Attr.cx "15"
-                ,Attr.cy "-10"
-                ,Attr.r "8"
-                ,Attr.fill "black"
-                ][]
-        ,Svg.circle [Attr.cx "18"
-                ,Attr.cy "10"
-                ,Attr.r "2"
-                ,Attr.fill "white"
-                ][]
-        ,Svg.circle [Attr.cx "18"
-                ,Attr.cy "-10"
-                ,Attr.r "2"
-                ,Attr.fill "white"
-                ][]
-        ,Svg.path [Attr.d "m 0 20 l -10 10 l -10 -5 z"
-            , Attr.fill "red"
-            ][]
-        ,Svg.path [Attr.d "m 0 -20 l -10 -10 l -10 5 z"
-            , Attr.fill "red"
-            ][]
-        ]
 
 
 tsukamaetaKingyoView: Int -> Kingyo -> Svg Msg

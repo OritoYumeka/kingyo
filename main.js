@@ -6370,11 +6370,30 @@ var $author$project$MainOct09$sukuu = F2(
 	function (_v0, kingyos) {
 		var x = _v0.a;
 		var y = _v0.b;
+		var radius = function (kingyo) {
+			var _v1 = kingyo.level;
+			switch (_v1) {
+				case 1:
+					return 60;
+				case 2:
+					return 70;
+				case 3:
+					return 80;
+				case 4:
+					return 90;
+				case 5:
+					return 60;
+				default:
+					return 60;
+			}
+		};
 		return A2(
 			$elm$core$List$filter,
 			function (k) {
-				return $elm$core$Basics$sqrt(
-					A2($elm$core$Basics$pow, k.pos.x - x, 2) + A2($elm$core$Basics$pow, k.pos.y - y, 2)) > 60;
+				return _Utils_cmp(
+					$elm$core$Basics$sqrt(
+						A2($elm$core$Basics$pow, k.pos.x - x, 2) + A2($elm$core$Basics$pow, k.pos.y - y, 2)),
+					radius(k)) > 0;
 			},
 			kingyos);
 	});
@@ -7419,13 +7438,600 @@ var $andrewMacmurray$elm_simple_animation$Simple$Animation$Animated$svg = $andre
 var $author$project$MainOct09$animatedSvg = $andrewMacmurray$elm_simple_animation$Simple$Animation$Animated$svg(
 	{_class: $elm$svg$Svg$Attributes$class});
 var $author$project$MainOct09$animatedG = $author$project$MainOct09$animatedSvg($elm$svg$Svg$g);
-var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
 var $elm$core$Basics$atan = _Basics_atan;
+var $elm$svg$Svg$ellipse = $elm$svg$Svg$trustedNode('ellipse');
+var $elm$svg$Svg$line = $elm$svg$Svg$trustedNode('line');
+var $elm$core$Basics$pi = _Basics_pi;
+var $elm$svg$Svg$Attributes$rx = _VirtualDom_attribute('rx');
+var $elm$svg$Svg$Attributes$ry = _VirtualDom_attribute('ry');
+var $elm$svg$Svg$Attributes$transform = _VirtualDom_attribute('transform');
+var $elm$svg$Svg$Attributes$x1 = _VirtualDom_attribute('x1');
+var $elm$svg$Svg$Attributes$x2 = _VirtualDom_attribute('x2');
+var $elm$svg$Svg$Attributes$y1 = _VirtualDom_attribute('y1');
+var $elm$svg$Svg$Attributes$y2 = _VirtualDom_attribute('y2');
+var $author$project$Kingyo$kameView = function (kingyo) {
+	var vy = kingyo.v.y;
+	var vx = kingyo.v.x;
+	var transtr = '(' + ($elm$core$String$fromInt(kingyo.pos.x) + (',' + ($elm$core$String$fromInt(kingyo.pos.y) + ')')));
+	var theta = $elm$core$String$fromFloat(
+		(kingyo.v.x > 0) ? ((180 / $elm$core$Basics$pi) * $elm$core$Basics$atan(vy / vx)) : (180 + ((180 / $elm$core$Basics$pi) * $elm$core$Basics$atan(vy / vx))));
+	var py = kingyo.pos.y;
+	var px = kingyo.pos.x;
+	return A2(
+		$elm$svg$Svg$g,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$transform(
+				'rotate(' + (theta + (',' + ($elm$core$String$fromInt(px) + (',' + ($elm$core$String$fromInt(py) + (')' + ('translate' + transtr))))))))
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('-10'),
+						$elm$svg$Svg$Attributes$cy('0'),
+						$elm$svg$Svg$Attributes$rx('50'),
+						$elm$svg$Svg$Attributes$ry('40'),
+						$elm$svg$Svg$Attributes$fill('green')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('45'),
+						$elm$svg$Svg$Attributes$cy('0'),
+						$elm$svg$Svg$Attributes$rx('20'),
+						$elm$svg$Svg$Attributes$ry('10'),
+						$elm$svg$Svg$Attributes$fill('green')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('50'),
+						$elm$svg$Svg$Attributes$cy('8'),
+						$elm$svg$Svg$Attributes$r('7'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('50'),
+						$elm$svg$Svg$Attributes$cy('8'),
+						$elm$svg$Svg$Attributes$r('5'),
+						$elm$svg$Svg$Attributes$fill('black')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('50'),
+						$elm$svg$Svg$Attributes$cy('8'),
+						$elm$svg$Svg$Attributes$r('1'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('50'),
+						$elm$svg$Svg$Attributes$cy('-8'),
+						$elm$svg$Svg$Attributes$r('7'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('50'),
+						$elm$svg$Svg$Attributes$cy('-8'),
+						$elm$svg$Svg$Attributes$r('5'),
+						$elm$svg$Svg$Attributes$fill('black')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('50'),
+						$elm$svg$Svg$Attributes$cy('-8'),
+						$elm$svg$Svg$Attributes$r('1'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('20'),
+						$elm$svg$Svg$Attributes$cy('30'),
+						$elm$svg$Svg$Attributes$rx('10'),
+						$elm$svg$Svg$Attributes$ry('20'),
+						$elm$svg$Svg$Attributes$fill('green')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('20'),
+						$elm$svg$Svg$Attributes$cy('-30'),
+						$elm$svg$Svg$Attributes$rx('10'),
+						$elm$svg$Svg$Attributes$ry('20'),
+						$elm$svg$Svg$Attributes$fill('green')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('-30'),
+						$elm$svg$Svg$Attributes$cy('30'),
+						$elm$svg$Svg$Attributes$rx('10'),
+						$elm$svg$Svg$Attributes$ry('20'),
+						$elm$svg$Svg$Attributes$fill('green')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('-30'),
+						$elm$svg$Svg$Attributes$cy('-30'),
+						$elm$svg$Svg$Attributes$rx('10'),
+						$elm$svg$Svg$Attributes$ry('20'),
+						$elm$svg$Svg$Attributes$fill('green')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('-60'),
+						$elm$svg$Svg$Attributes$cy('0'),
+						$elm$svg$Svg$Attributes$rx('20'),
+						$elm$svg$Svg$Attributes$ry('5'),
+						$elm$svg$Svg$Attributes$fill('green')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('30'),
+						$elm$svg$Svg$Attributes$y1('-20'),
+						$elm$svg$Svg$Attributes$x2('-45'),
+						$elm$svg$Svg$Attributes$y2('-20'),
+						$elm$svg$Svg$Attributes$stroke('black'),
+						$elm$svg$Svg$Attributes$strokeWidth('1')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('30'),
+						$elm$svg$Svg$Attributes$y1('0'),
+						$elm$svg$Svg$Attributes$x2('-45'),
+						$elm$svg$Svg$Attributes$y2('0'),
+						$elm$svg$Svg$Attributes$stroke('black'),
+						$elm$svg$Svg$Attributes$strokeWidth('1')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('30'),
+						$elm$svg$Svg$Attributes$y1('20'),
+						$elm$svg$Svg$Attributes$x2('-45'),
+						$elm$svg$Svg$Attributes$y2('20'),
+						$elm$svg$Svg$Attributes$stroke('black'),
+						$elm$svg$Svg$Attributes$strokeWidth('1')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('20'),
+						$elm$svg$Svg$Attributes$y1('-30'),
+						$elm$svg$Svg$Attributes$x2('20'),
+						$elm$svg$Svg$Attributes$y2('30'),
+						$elm$svg$Svg$Attributes$stroke('black'),
+						$elm$svg$Svg$Attributes$strokeWidth('1')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-10'),
+						$elm$svg$Svg$Attributes$y1('-30'),
+						$elm$svg$Svg$Attributes$x2('-10'),
+						$elm$svg$Svg$Attributes$y2('30'),
+						$elm$svg$Svg$Attributes$stroke('black'),
+						$elm$svg$Svg$Attributes$strokeWidth('1')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-40'),
+						$elm$svg$Svg$Attributes$y1('-30'),
+						$elm$svg$Svg$Attributes$x2('-40'),
+						$elm$svg$Svg$Attributes$y2('30'),
+						$elm$svg$Svg$Attributes$stroke('black'),
+						$elm$svg$Svg$Attributes$strokeWidth('1')
+					]),
+				_List_Nil)
+			]));
+};
+var $author$project$Kingyo$kaniView = function (kingyo) {
+	var vy = kingyo.v.y;
+	var vx = kingyo.v.x;
+	var transtr = '(' + ($elm$core$String$fromInt(kingyo.pos.x) + (',' + ($elm$core$String$fromInt(kingyo.pos.y) + ')')));
+	var theta = $elm$core$String$fromFloat(
+		(kingyo.v.x > 0) ? ((180 / $elm$core$Basics$pi) * $elm$core$Basics$atan(vy / vx)) : (180 + ((180 / $elm$core$Basics$pi) * $elm$core$Basics$atan(vy / vx))));
+	var py = kingyo.pos.y;
+	var px = kingyo.pos.x;
+	return A2(
+		$elm$svg$Svg$g,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$transform(
+				'rotate(' + (theta + (',' + ($elm$core$String$fromInt(px) + (',' + ($elm$core$String$fromInt(py) + (')' + ('translate' + transtr))))))))
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('-20'),
+						$elm$svg$Svg$Attributes$cy('0'),
+						$elm$svg$Svg$Attributes$rx('30'),
+						$elm$svg$Svg$Attributes$ry('60'),
+						$elm$svg$Svg$Attributes$fill('red')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('45'),
+						$elm$svg$Svg$Attributes$cy('55'),
+						$elm$svg$Svg$Attributes$rx('20'),
+						$elm$svg$Svg$Attributes$ry('10'),
+						$elm$svg$Svg$Attributes$fill('red')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$ellipse,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('45'),
+						$elm$svg$Svg$Attributes$cy('-55'),
+						$elm$svg$Svg$Attributes$rx('20'),
+						$elm$svg$Svg$Attributes$ry('10'),
+						$elm$svg$Svg$Attributes$fill('red')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('0'),
+						$elm$svg$Svg$Attributes$y1('40'),
+						$elm$svg$Svg$Attributes$x2('40'),
+						$elm$svg$Svg$Attributes$y2('60'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('10')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('0'),
+						$elm$svg$Svg$Attributes$y1('-40'),
+						$elm$svg$Svg$Attributes$x2('40'),
+						$elm$svg$Svg$Attributes$y2('-60'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('10')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('40'),
+						$elm$svg$Svg$Attributes$y1('-55'),
+						$elm$svg$Svg$Attributes$x2('60'),
+						$elm$svg$Svg$Attributes$y2('-55'),
+						$elm$svg$Svg$Attributes$stroke('black'),
+						$elm$svg$Svg$Attributes$strokeWidth('1')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('40'),
+						$elm$svg$Svg$Attributes$y1('55'),
+						$elm$svg$Svg$Attributes$x2('60'),
+						$elm$svg$Svg$Attributes$y2('55'),
+						$elm$svg$Svg$Attributes$stroke('black'),
+						$elm$svg$Svg$Attributes$strokeWidth('1')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-40'),
+						$elm$svg$Svg$Attributes$y1('40'),
+						$elm$svg$Svg$Attributes$x2('-70'),
+						$elm$svg$Svg$Attributes$y2('60'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-80'),
+						$elm$svg$Svg$Attributes$y1('40'),
+						$elm$svg$Svg$Attributes$x2('-68'),
+						$elm$svg$Svg$Attributes$y2('60'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-40'),
+						$elm$svg$Svg$Attributes$y1('-40'),
+						$elm$svg$Svg$Attributes$x2('-70'),
+						$elm$svg$Svg$Attributes$y2('-60'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-80'),
+						$elm$svg$Svg$Attributes$y1('-40'),
+						$elm$svg$Svg$Attributes$x2('-68'),
+						$elm$svg$Svg$Attributes$y2('-60'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-40'),
+						$elm$svg$Svg$Attributes$y1('-30'),
+						$elm$svg$Svg$Attributes$x2('-70'),
+						$elm$svg$Svg$Attributes$y2('-50'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-80'),
+						$elm$svg$Svg$Attributes$y1('-30'),
+						$elm$svg$Svg$Attributes$x2('-68'),
+						$elm$svg$Svg$Attributes$y2('-50'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-30'),
+						$elm$svg$Svg$Attributes$y1('50'),
+						$elm$svg$Svg$Attributes$x2('-70'),
+						$elm$svg$Svg$Attributes$y2('70'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-80'),
+						$elm$svg$Svg$Attributes$y1('50'),
+						$elm$svg$Svg$Attributes$x2('-68'),
+						$elm$svg$Svg$Attributes$y2('70'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-30'),
+						$elm$svg$Svg$Attributes$y1('-50'),
+						$elm$svg$Svg$Attributes$x2('-70'),
+						$elm$svg$Svg$Attributes$y2('-70'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-80'),
+						$elm$svg$Svg$Attributes$y1('-50'),
+						$elm$svg$Svg$Attributes$x2('-68'),
+						$elm$svg$Svg$Attributes$y2('-70'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-30'),
+						$elm$svg$Svg$Attributes$y1('30'),
+						$elm$svg$Svg$Attributes$x2('-70'),
+						$elm$svg$Svg$Attributes$y2('50'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-80'),
+						$elm$svg$Svg$Attributes$y1('30'),
+						$elm$svg$Svg$Attributes$x2('-68'),
+						$elm$svg$Svg$Attributes$y2('50'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-30'),
+						$elm$svg$Svg$Attributes$y1('20'),
+						$elm$svg$Svg$Attributes$x2('-70'),
+						$elm$svg$Svg$Attributes$y2('40'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-80'),
+						$elm$svg$Svg$Attributes$y1('20'),
+						$elm$svg$Svg$Attributes$x2('-68'),
+						$elm$svg$Svg$Attributes$y2('40'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-30'),
+						$elm$svg$Svg$Attributes$y1('-20'),
+						$elm$svg$Svg$Attributes$x2('-70'),
+						$elm$svg$Svg$Attributes$y2('-40'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1('-80'),
+						$elm$svg$Svg$Attributes$y1('-20'),
+						$elm$svg$Svg$Attributes$x2('-68'),
+						$elm$svg$Svg$Attributes$y2('-40'),
+						$elm$svg$Svg$Attributes$stroke('red'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('15'),
+						$elm$svg$Svg$Attributes$cy('10'),
+						$elm$svg$Svg$Attributes$r('10'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('15'),
+						$elm$svg$Svg$Attributes$cy('10'),
+						$elm$svg$Svg$Attributes$r('8'),
+						$elm$svg$Svg$Attributes$fill('black')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('15'),
+						$elm$svg$Svg$Attributes$cy('-10'),
+						$elm$svg$Svg$Attributes$r('10'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('15'),
+						$elm$svg$Svg$Attributes$cy('-10'),
+						$elm$svg$Svg$Attributes$r('8'),
+						$elm$svg$Svg$Attributes$fill('black')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('18'),
+						$elm$svg$Svg$Attributes$cy('10'),
+						$elm$svg$Svg$Attributes$r('2'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('18'),
+						$elm$svg$Svg$Attributes$cy('-10'),
+						$elm$svg$Svg$Attributes$r('2'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil)
+			]));
+};
 var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
 var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
-var $elm$core$Basics$pi = _Basics_pi;
-var $elm$svg$Svg$Attributes$transform = _VirtualDom_attribute('transform');
-var $author$project$MainOct09$kingyoView = function (kingyo) {
+var $author$project$KingyoView$kingyoView = function (kingyo) {
 	var vy = kingyo.v.y;
 	var vx = kingyo.v.x;
 	var transtr = '(' + ($elm$core$String$fromInt(kingyo.pos.x) + (',' + ($elm$core$String$fromInt(kingyo.pos.y) + ')')));
@@ -7529,6 +8135,156 @@ var $author$project$MainOct09$kingyoView = function (kingyo) {
 				_List_Nil)
 			]));
 };
+var $author$project$Kingyo$namazuView = function (kingyo) {
+	var vy = kingyo.v.y;
+	var vx = kingyo.v.x;
+	var transtr = '(' + ($elm$core$String$fromInt(kingyo.pos.x) + (',' + ($elm$core$String$fromInt(kingyo.pos.y) + ')')));
+	var theta = $elm$core$String$fromFloat(
+		(kingyo.v.x > 0) ? ((180 / $elm$core$Basics$pi) * $elm$core$Basics$atan(vy / vx)) : (180 + ((180 / $elm$core$Basics$pi) * $elm$core$Basics$atan(vy / vx))));
+	var py = kingyo.pos.y;
+	var px = kingyo.pos.x;
+	return A2(
+		$elm$svg$Svg$g,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$transform(
+				'rotate(' + (theta + (',' + ($elm$core$String$fromInt(px) + (',' + ($elm$core$String$fromInt(py) + (')' + ('translate' + transtr))))))))
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$svg$Svg$path,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$d('m 0 20 l 30 -20 l -30 -20 l -60 26 l 0 -12 z'),
+						$elm$svg$Svg$Attributes$fill('blue')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('-10'),
+						$elm$svg$Svg$Attributes$cy('0'),
+						$elm$svg$Svg$Attributes$r('20'),
+						$elm$svg$Svg$Attributes$fill('blue')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('21'),
+						$elm$svg$Svg$Attributes$cy('0'),
+						$elm$svg$Svg$Attributes$r('10'),
+						$elm$svg$Svg$Attributes$fill('pink')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('20'),
+						$elm$svg$Svg$Attributes$cy('0'),
+						$elm$svg$Svg$Attributes$r('7'),
+						$elm$svg$Svg$Attributes$fill('pink'),
+						$elm$svg$Svg$Attributes$stroke('black')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('15'),
+						$elm$svg$Svg$Attributes$cy('10'),
+						$elm$svg$Svg$Attributes$r('10'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('15'),
+						$elm$svg$Svg$Attributes$cy('10'),
+						$elm$svg$Svg$Attributes$r('8'),
+						$elm$svg$Svg$Attributes$fill('black')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('15'),
+						$elm$svg$Svg$Attributes$cy('-10'),
+						$elm$svg$Svg$Attributes$r('10'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('15'),
+						$elm$svg$Svg$Attributes$cy('-10'),
+						$elm$svg$Svg$Attributes$r('8'),
+						$elm$svg$Svg$Attributes$fill('black')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('18'),
+						$elm$svg$Svg$Attributes$cy('10'),
+						$elm$svg$Svg$Attributes$r('2'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$circle,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$cx('18'),
+						$elm$svg$Svg$Attributes$cy('-10'),
+						$elm$svg$Svg$Attributes$r('2'),
+						$elm$svg$Svg$Attributes$fill('white')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$path,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$d('m 0 20 l -10 10 l -10 -5 z'),
+						$elm$svg$Svg$Attributes$fill('blue')
+					]),
+				_List_Nil),
+				A2(
+				$elm$svg$Svg$path,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$d('m 0 -20 l -10 -10 l -10 5 z'),
+						$elm$svg$Svg$Attributes$fill('blue')
+					]),
+				_List_Nil)
+			]));
+};
+var $author$project$Kingyo$fishView = function (fish) {
+	var _v0 = fish.level;
+	switch (_v0) {
+		case 1:
+			return $author$project$KingyoView$kingyoView(fish);
+		case 2:
+			return $author$project$Kingyo$namazuView(fish);
+		case 3:
+			return $author$project$Kingyo$kaniView(fish);
+		case 4:
+			return $author$project$Kingyo$kameView(fish);
+		default:
+			return $author$project$KingyoView$kingyoView(fish);
+	}
+};
+var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
 var $author$project$Types$Down = function (a) {
 	return {$: 'Down', a: a};
 };
@@ -8143,7 +8899,7 @@ var $author$project$MainOct09$pondView = function (model) {
 							_List_Nil)
 						]),
 					_Utils_ap(
-						A2($elm$core$List$map, $author$project$MainOct09$kingyoView, model.kingyos),
+						A2($elm$core$List$map, $author$project$Kingyo$fishView, model.kingyos),
 						A2($elm$core$List$indexedMap, $author$project$MainOct09$tsukamaetaKingyoView, model.tsukamaeta))))));
 };
 var $author$project$Types$Join = {$: 'Join'};
