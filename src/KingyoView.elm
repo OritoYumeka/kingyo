@@ -32,8 +32,8 @@ kingyoView kingyo =
                 )
                 ]
         [Svg.path [d "m 0 20 l 30 -20 l -30 -20 l -60 26 l 0 -12 z"
-                , fill "red"
-                , stroke "red"
+                , fill "orange"
+                , stroke "orange"
               ]
             []
         ,circle [cx "15"
@@ -67,10 +67,10 @@ kingyoView kingyo =
                 ,fill "white"
                 ][]
         ,Svg.path [d "m 0 20 l -10 10 l -10 -5 z"
-            , fill "red"
+            , fill "orange"
             ][]
         ,Svg.path [d "m 0 -20 l -10 -10 l -10 5 z"
-            , fill "red"
+            , fill "orange"
             ][]
         ]
 namazuView: Kingyo -> Svg Msg

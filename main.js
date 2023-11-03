@@ -6712,12 +6712,17 @@ var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
 var $elm$svg$Svg$Attributes$fontSize = _VirtualDom_attribute('font-size');
 var $elm$core$String$fromFloat = _String_fromNumber;
 var $elm$svg$Svg$g = $elm$svg$Svg$trustedNode('g');
+var $elm$svg$Svg$line = $elm$svg$Svg$trustedNode('line');
 var $elm$svg$Svg$Attributes$r = _VirtualDom_attribute('r');
 var $elm$svg$Svg$Attributes$stroke = _VirtualDom_attribute('stroke');
 var $elm$svg$Svg$Attributes$strokeWidth = _VirtualDom_attribute('stroke-width');
 var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
 var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
+var $elm$svg$Svg$Attributes$x1 = _VirtualDom_attribute('x1');
+var $elm$svg$Svg$Attributes$x2 = _VirtualDom_attribute('x2');
 var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
+var $elm$svg$Svg$Attributes$y1 = _VirtualDom_attribute('y1');
+var $elm$svg$Svg$Attributes$y2 = _VirtualDom_attribute('y2');
 var $author$project$MainOct09$amiView = function (p) {
 	return A2(
 		$elm$svg$Svg$g,
@@ -6751,7 +6756,23 @@ var $author$project$MainOct09$amiView = function (p) {
 				_List_fromArray(
 					[
 						$elm$html$Html$text(p.name)
-					]))
+					])),
+				A2(
+				$elm$svg$Svg$line,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$x1(
+						$elm$core$String$fromFloat(p.x)),
+						$elm$svg$Svg$Attributes$y1(
+						$elm$core$String$fromFloat(p.y + 50)),
+						$elm$svg$Svg$Attributes$x2(
+						$elm$core$String$fromFloat(p.x)),
+						$elm$svg$Svg$Attributes$y2(
+						$elm$core$String$fromFloat(p.y + 100)),
+						$elm$svg$Svg$Attributes$stroke('yellow'),
+						$elm$svg$Svg$Attributes$strokeWidth('5')
+					]),
+				_List_Nil)
 			]));
 };
 var $elm$svg$Svg$Attributes$class = _VirtualDom_attribute('class');
@@ -7440,15 +7461,10 @@ var $author$project$MainOct09$animatedSvg = $andrewMacmurray$elm_simple_animatio
 var $author$project$MainOct09$animatedG = $author$project$MainOct09$animatedSvg($elm$svg$Svg$g);
 var $elm$core$Basics$atan = _Basics_atan;
 var $elm$svg$Svg$ellipse = $elm$svg$Svg$trustedNode('ellipse');
-var $elm$svg$Svg$line = $elm$svg$Svg$trustedNode('line');
 var $elm$core$Basics$pi = _Basics_pi;
 var $elm$svg$Svg$Attributes$rx = _VirtualDom_attribute('rx');
 var $elm$svg$Svg$Attributes$ry = _VirtualDom_attribute('ry');
 var $elm$svg$Svg$Attributes$transform = _VirtualDom_attribute('transform');
-var $elm$svg$Svg$Attributes$x1 = _VirtualDom_attribute('x1');
-var $elm$svg$Svg$Attributes$x2 = _VirtualDom_attribute('x2');
-var $elm$svg$Svg$Attributes$y1 = _VirtualDom_attribute('y1');
-var $elm$svg$Svg$Attributes$y2 = _VirtualDom_attribute('y2');
 var $author$project$Kingyo$kameView = function (kingyo) {
 	var vy = kingyo.v.y;
 	var vx = kingyo.v.x;
@@ -8053,8 +8069,8 @@ var $author$project$KingyoView$kingyoView = function (kingyo) {
 				_List_fromArray(
 					[
 						$elm$svg$Svg$Attributes$d('m 0 20 l 30 -20 l -30 -20 l -60 26 l 0 -12 z'),
-						$elm$svg$Svg$Attributes$fill('red'),
-						$elm$svg$Svg$Attributes$stroke('red')
+						$elm$svg$Svg$Attributes$fill('orange'),
+						$elm$svg$Svg$Attributes$stroke('orange')
 					]),
 				_List_Nil),
 				A2(
@@ -8122,7 +8138,7 @@ var $author$project$KingyoView$kingyoView = function (kingyo) {
 				_List_fromArray(
 					[
 						$elm$svg$Svg$Attributes$d('m 0 20 l -10 10 l -10 -5 z'),
-						$elm$svg$Svg$Attributes$fill('red')
+						$elm$svg$Svg$Attributes$fill('orange')
 					]),
 				_List_Nil),
 				A2(
@@ -8130,7 +8146,7 @@ var $author$project$KingyoView$kingyoView = function (kingyo) {
 				_List_fromArray(
 					[
 						$elm$svg$Svg$Attributes$d('m 0 -20 l -10 -10 l -10 5 z'),
-						$elm$svg$Svg$Attributes$fill('red')
+						$elm$svg$Svg$Attributes$fill('orange')
 					]),
 				_List_Nil)
 			]));

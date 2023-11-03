@@ -463,6 +463,13 @@ amiView p =
                    ,Attr.fontSize "30"
                    ]
              [text p.name]
+        ,Svg.line  [Attr.x1 (String.fromFloat p.x)
+                   ,Attr.y1 (String.fromFloat (p.y+50))
+                   ,Attr.x2 (String.fromFloat p.x)
+                   ,Attr.y2 (String.fromFloat (p.y+100))
+                   ,Attr.stroke "yellow"
+                   ,Attr.strokeWidth "5" 
+                   ] [] 
         ]
 
 
