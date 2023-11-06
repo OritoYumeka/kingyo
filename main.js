@@ -6374,17 +6374,17 @@ var $author$project$MainOct09$sukuu = F2(
 			var _v1 = kingyo.level;
 			switch (_v1) {
 				case 1:
-					return 60;
-				case 2:
-					return 70;
-				case 3:
-					return 80;
-				case 4:
 					return 90;
+				case 2:
+					return 80;
+				case 3:
+					return 70;
+				case 4:
+					return 60;
 				case 5:
-					return 60;
+					return 90;
 				default:
-					return 60;
+					return 90;
 			}
 		};
 		return A2(
@@ -6465,7 +6465,7 @@ var $author$project$MainOct09$update = F2(
 					(info.num === 1) ? A2(
 						$elm$random$Random$generate,
 						$author$project$Types$KingyoGenerated,
-						A2($elm$random$Random$list, 15, $author$project$MainOct09$randomKingyo)) : $elm$core$Platform$Cmd$none);
+						A2($elm$random$Random$list, 20, $author$project$MainOct09$randomKingyo)) : $elm$core$Platform$Cmd$none);
 			case 'Recv':
 				var info = msg.a;
 				var exist = A2(

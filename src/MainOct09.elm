@@ -127,7 +127,7 @@ update msg model =
                          }
                         ,if info.num == 1 then
                              Random.generate
-                                 KingyoGenerated (Random.list 15 randomKingyo)
+                                 KingyoGenerated (Random.list 20 randomKingyo)
                          else
                              Cmd.none
                         )
@@ -217,12 +217,12 @@ sukuu: (Float, Float) -> (List Kingyo) -> (List Kingyo)
 sukuu (x,y) kingyos =
     let
         radius kingyo = (case kingyo.level of
-                        1->60
-                        2->70
-                        3->80
-                        4->90
-                        5->60
-                        _->60
+                        1->90
+                        2->80
+                        3->70
+                        4->60
+                        5->90
+                        _->90
                         )
     in
     List.filter
